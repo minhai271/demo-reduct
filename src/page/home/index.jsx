@@ -4,24 +4,14 @@ import Modal from '../../component/modal'
 import { useDispatch, useSelector } from 'react-redux'
 import { decrement, increment } from '../../features/demoSlice'
 import { add } from '../../features/todoSlice'
+import "./index.scss"
 
 function Home() {
   const [input , setInput] = useState("")
-  const demo = useSelector((store) => store.demo)
+  const demoValue = useSelector((store) => store.demo)
   const [open, setOpen ] = useState(false)
   const dispatch = useDispatch()
-  const handleOpneModal = () => {
-    setOpen(true)
-  }
-  const handleIncrement= () => {
-    dispatch(increment())
-  }
-  const handleDecrement = () => {
-  dispatch(decrement())
-  }
-  const handleCloseModal = () => {
-    setOpen(false)
-  }
+  
   const handleAddNewTask = ()=>{
 dispatch(
   add({
@@ -32,17 +22,11 @@ dispatch(
   }
   
   return (
-    <div>
-      <h1>{demo}</h1>
-     <Button  onClick={handleIncrement}> increment</Button>
-     <Button onClick={handleDecrement}> decrement</Button>
-
-     <input type="text" value={input} onChange={(e) => 
-      setInput(e.target.value)
-     }/>
-     <Button onClick={handleAddNewTask}> add new task</Button>
-    
-    <Modal isOpen={open} onCancel={handleCloseModal} /></div>
+    <div className='home'>
+<input value={input} type="text" className='home__input' onChange={(e) => setInput(e.target.value)} />
+<Button onClick={handleAddNewTask}>Add new Task</Button>
+<Table columns ={[] } dataSource={[]}></Table>
+</div>
   ) 
 }
 
